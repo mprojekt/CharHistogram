@@ -6,10 +6,12 @@ public class CharHistogram{
     
     public static void main(String[] args) {
         
-        Map<Integer, Integer> result = new HashMap<>();        
-        String inputString = "Ala ma \"kota\"\n Aa-Zz ąęvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv";
+        Map<Integer, Integer> result = new HashMap<>();
+        String example = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
+                + "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque "
+                + "penatibus et magnis dis parturient montes, nascetur ridiculus mus.";
                 
-        inputString.chars()
+        example.chars()
                 .filter(i -> i > 31)
                 .forEach(i -> {
                     int number = 1;
@@ -20,7 +22,7 @@ public class CharHistogram{
                     result.put(i, number);
                 });
         
-        System.out.println(inputString);
+        System.out.println(example);
         printResult(result);
     }
     
