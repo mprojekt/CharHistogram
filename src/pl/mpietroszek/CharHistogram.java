@@ -1,32 +1,30 @@
 package pl.mpietroszek;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CharHistogram{
     
     public static void main(String[] args) {
-        
-        Map<Integer, Integer> result = new HashMap<>();
+                
         String example = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
                 + "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque "
                 + "penatibus et magnis dis parturient montes, nascetur ridiculus mus.";
-                
-        example.chars()
-                .filter(i -> i > 31)
-                .forEach(i -> {
-                    int number = 1;
-                    if(result.containsKey(i)){
-                        number = result.get(i);
-                        number++;
-                    }
-                    result.put(i, number);
-                });
-        
         System.out.println(example);
+        
+        Map<Integer, Long> result = createHistogram(example); 
         printResult(result);
     }
     
-    private static void printResult(Map<Integer, Integer> result){
+    private static Map createHistogram(String string){
+        return string.chars()
+                .filter(i -> i > 31)
+                .boxed()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+    
+    private static void printResult(Map<Integer, Long> result){
         StringBuilder numbers = new StringBuilder();
         StringBuilder line = new StringBuilder();
         StringBuilder characters = new StringBuilder();
